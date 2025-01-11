@@ -26,3 +26,37 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+// Logo container scroll behavior
+document.addEventListener('DOMContentLoaded', function() {
+    const logoContainer = document.querySelector('.logo-container');
+    let lastScroll = 0;
+    let scrollThreshold = 50; // Minimum scroll before hiding
+    
+    // Only run on mobile devices
+    const isMobile = () => window.innerWidth <= 768;
+    
+    window.addEventListener('scroll', () => {
+        if (!isMobile()) return;
+        
+        const currentScroll = window.pageYOffset;
+        
+        // Determine scroll direction and distance
+        if (currentScroll > lastScroll && currentScroll > scrollThreshold) {
+            // Scrolling down
+            logoContainer.classList.add('hidden');
+        } else {
+            // Scrolling up
+            logoContainer.classList.remove('hidden');
+        }
+        
+        lastScroll = currentScroll;
+    });
+    
+    // Reset on resize
+    window.addEventListener('resize', () => {
+        if (!isMobile()) {
+            logoContainer.classList.remove('hidden');
+        }
+    });
+});

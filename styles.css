@@ -611,7 +611,8 @@ footer {
 .logo-container {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 1.5rem;
+    transition: transform 0.3s ease;
 }
 
 .ieee-logo {
@@ -1152,5 +1153,30 @@ footer {
     .info-card {
         padding: 0.8rem 1rem;
         min-height: 44px; /* Minimum touch target size */
+    }
+}
+
+/* Mobile-specific styles */
+@media (max-width: 768px) {
+    .logo-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 0.8rem 1rem;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        z-index: 1000;
+        transform: translateY(0);
+        transition: transform 0.3s ease;
+    }
+
+    .logo-container.hidden {
+        transform: translateY(-100%);
+    }
+
+    /* Adjust header spacing when logo is hidden */
+    header {
+        padding-top: var(--mobile-header-height);
     }
 }
