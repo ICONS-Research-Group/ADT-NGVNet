@@ -27,13 +27,16 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Logo container scroll behavior
+// Enhanced scroll behavior for mobile view
 document.addEventListener('DOMContentLoaded', function() {
     const logoContainer = document.querySelector('.logo-container');
-    let lastScroll = 0;
-    let scrollThreshold = 50; // Minimum scroll before hiding
+    const logo = document.querySelector('.ieee-logo');
+    const title = document.querySelector('.workshop-title');
     
-    // Only run on mobile devices
+    let lastScroll = 0;
+    let scrollThreshold = 50;
+    
+    // Check if device is mobile
     const isMobile = () => window.innerWidth <= 768;
     
     window.addEventListener('scroll', () => {
@@ -41,22 +44,25 @@ document.addEventListener('DOMContentLoaded', function() {
         
         const currentScroll = window.pageYOffset;
         
-        // Determine scroll direction and distance
         if (currentScroll > lastScroll && currentScroll > scrollThreshold) {
-            // Scrolling down
-            logoContainer.classList.add('hidden');
+            // Scrolling down - hide elements
+            logoContainer.classList.add('scroll-hide');
         } else {
-            // Scrolling up
-            logoContainer.classList.remove('hidden');
+            // Scrolling up - show elements
+            logoContainer.classList.remove('scroll-hide');
         }
         
         lastScroll = currentScroll;
     });
     
-    // Reset on resize
+    // Reset on window resize
     window.addEventListener('resize', () => {
         if (!isMobile()) {
-            logoContainer.classList.remove('hidden');
+            logoContainer.classList.remove('scroll-hide');
+            logo.style.opacity = '1';
+            title.style.opacity = '1';
+            logo.style.transform = 'translateY(0)';
+            title.style.transform = 'translateY(0)';
         }
     });
 });
